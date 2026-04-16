@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Annotated
+import os
 
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,7 +11,7 @@ from pydantic import BaseModel, EmailStr
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, create_engine
 from sqlalchemy.orm import Session, declarative_base, relationship, sessionmaker
 
-DATABASE_URL = "postgresql://user:password@db:5432/ticketdb"
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@db:5432/ticketdb")
 SECRET = "itsmsecret"
 ALGORITHM = "HS256"
 SLA_HOURS = {"P1": 4, "P2": 8, "P3": 24}
